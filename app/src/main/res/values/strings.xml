@@ -1,6 +1,27 @@
 <resources>
-    <string name="app_name">WatUsos</string>
+    <string name="app_name">Usos</string>
+    <string name="title_activity_sing_in">SingInActivity</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_choose">ChooseActivity</string>
+
+    <string name="title_section1">Oceny końcowe</string>
+    <string name="title_section2">Sprawdziany</string>
+    <string name="title_section3">Zaliczenie etapów</string>
+    <string name="title_section4">Rejestracja</string>
+    <string name="title_section5">Ankiety</string>
+    <string name="title_section6">Grupy dziekańskie</string>
+
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_example">Example action</string>
+    <string name="remember">Zapamiętaj mnie</string>
+    <string name="sing">Zaloguj</string>
+    <string name="language">Zmiana języka</string>
+    <string name="refresh">Odśwież</string>
+    <string name="title_activity_language">LanguageActivity</string>
+    <string name="title_activity_navigation_drawer_fragment">NavigationDrawerFragment</string>
 </resources>

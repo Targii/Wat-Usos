@@ -1,29 +1,26 @@
 package com.example.watusos.watusos;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-
-public class MainActivity extends ActionBarActivity {
+/**
+ * Created by Kamil on 2015-04-26.
+ */
+public class LanguageActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_language);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //This is Targiiaaaaaaaa
-        //Branch test
-        //this is kampre146- dshfjsdbfjbdc
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_language, menu);
         return true;
     }
 
@@ -41,9 +38,5 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void onSignInClick(View view) {
-        Intent intent = new Intent(this,ChooseActivity.class);
-        startActivity(intent);
-
-    }
 }
+
