@@ -3,4 +3,7 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="Button_Zaloguj">Zaloguj</string>
+    <string name="TextField_Identyfikator">Identyfikator</string>
+    <string name="pass_Hasło">Hasło</string>
 </resources>
