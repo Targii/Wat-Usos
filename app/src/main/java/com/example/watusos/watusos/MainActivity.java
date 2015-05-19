@@ -1,129 +1,47 @@
 package com.example.watusos.watusos;
 
 
-import android.support.v4.widget.SlidingPaneLayout;
-import android.support.v7.app.ActionBarActivity;
+
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 
+public class MainActivity extends Activity {
 
-public class MainActivity extends ActionBarActivity {
-    SlidingPaneLayout mSlidingPanel;
-    ListView mMenuList;
-    TextView TitleText;
-
-    String [] MenuTitles = new String[]{"First Item","Second Item","Third Item","Fourth Item"};
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSlidingPanel = (SlidingPaneLayout) findViewById(R.id.SlidingPanel);
-        mMenuList = (ListView) findViewById(R.id.MenuList);
 
 
-        TitleText = (TextView)findViewById(android.R.id.title);
+        //Obsługa ListView
+        ListView schoolListView = (ListView) findViewById(R.id.listView);
+        ArrayList<String> schoolStringArray = new ArrayList<>();
+        schoolStringArray.add("WAT");
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.list_rows, schoolStringArray);
+        schoolListView.setAdapter(adapter);
 
 
-       mMenuList.setAdapter(new ArrayAdapter(this, android.R.layout.simple_list_item_1,MenuTitles));
+        schoolListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent n = new Intent(getApplicationContext(), LoginScreen.class);
+                n.putExtra("position", position);
+                startActivity(n);
+            }
+        });
 
-        mSlidingPanel.setPanelSlideListener(new SlidingPaneLayoutListener());
-        mSlidingPanel.setParallaxDistance(200);
 
-
-//        getActionBar().setDisplayShowHomeEnabled(true);
-     //   getActionBar().setHomeButtonEnabled(true);
 
     }
 
 
-
-
-
-    private class SlidingPaneLayoutListener implements SlidingPaneLayout.PanelSlideListener {
-
-        @Override
-        public void onPanelClosed(View arg0) {
-            // TODO Auto-generated method stub
-            // getActionBar().setTitle(getString(R.string.app_name));
-            //  appImage.animate().rotation(0);
-        }
-
-        @Override
-        public void onPanelOpened(View arg0) {
-            // TODO Auto-generated method stub
-           // getActionBar().setTitle("Menu Titles");
-            // appImage.animate().rotation(90);
-        }
-
-        @Override
-        public void onPanelSlide(View arg0, float arg1) {
-            // TODO Auto-generated method stub
-
-        }
-
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // TODO Auto-generated method stub
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                if(mSlidingPanel.isOpen()){
-
-                    mSlidingPanel.closePane();
-                 //   getActionBar().setTitle(getString(R.string.app_name));
-                }
-                else{
-
-                    mSlidingPanel.openPane();
-               //     getActionBar().setTitle("Menu Titles");
-                }
-                break;
-            default:
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    public void onButtonZalogujClick(View view){
-        new postData().execute();
-        System.out.println("To jest ten token?" );
-    }
-
-    /* As far not needed, looking for proper implementation with AsycTask
-    public String getUserPIN(String userToken){
-        //Kod odpowiedzialny za wyświetlanie przeglądarki i przekierowania na strone logowania watu
-        // utworzenie intentu przejścia do strony watu
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://logowanie.wat.edu.pl/cas/login?locale=pl&service=https%3A%2F%2Fusosapps.wat.edu.pl%2Fapps%2Flogin%3Fnext%3D%252Fapps%252Fauthorize%253Foauth_token%"+ userToken +"%2526interactivity%253Dminimal"));
-
-        // utworzenie intentu "owijającego" nasz docelowy intent, który umożliwi wybranie aplikacji
-        Intent chooser = Intent.createChooser(intent, "Wybierz program");
-
-        startActivity(chooser);
-        EditText PinEdit = (EditText) findViewById(R.id.editText3);
-        String PIN = "";
-        PIN = PinEdit.getText().toString();
-
-
-
-
-
-
-        return PIN;
-    }*/
-
-    public void onClickPasswordEditText(View view) {
-        //Zmiana wyśwetlania z text na protected password, po kliknięciu na EditText
-        EditText passEdit = (EditText) findViewById(R.id.editText);
-        passEdit.setInputType(0x00000081);
-
-
-    }
 }

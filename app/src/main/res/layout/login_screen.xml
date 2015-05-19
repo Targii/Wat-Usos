@@ -1,0 +1,51 @@
+<android.support.v4.widget.SlidingPaneLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/SlidingPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <LinearLayout
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="left">
+
+        <ListView
+            android:id="@+id/MenuList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+        </ListView>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="right"
+        android:background="#50fffff9"
+        android:orientation="vertical" >
+
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:ems="10"
+            android:id="@+id/editText3"
+            android:layout_marginTop="44dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true" />
+
+        <Button
+            android:layout_width="235dp"
+            android:layout_height="70dp"
+            android:text="@string/Button_Zaloguj"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal"
+            android:layout_x="86dp"
+            android:layout_y="130dp"
+            android:onClick="onButtonZalogujClick"
+            android:layout_below="@+id/editText3"
+            android:layout_centerHorizontal="true" />
+
+    </RelativeLayout>
+
+
+</android.support.v4.widget.SlidingPaneLayout>
