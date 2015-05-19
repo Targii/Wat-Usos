@@ -2,7 +2,7 @@ package com.example.watusos.watusos;
 
 
 import android.os.AsyncTask;
-
+import android.webkit.WebView;
 
 
 import java.net.URLEncoder;
@@ -17,7 +17,7 @@ import oauth.signpost.commonshttp.CommonsHttpOAuthProvider;
  * Jest to funkcja która powinna być odpowiedzialna za logowanie użytkowników do USOSA
  * Powinna to dobre słowo.
  */
-class postData extends AsyncTask<Void, Integer, String> {
+public class postData extends AsyncTask<Void, Integer, String> {
     @Override
     protected String doInBackground(Void... params) {
         OAuthConsumer consumer = new CommonsHttpOAuthConsumer("24cD4dfpbF5YeDQvMgMN",
@@ -25,12 +25,13 @@ class postData extends AsyncTask<Void, Integer, String> {
 
         String scope = "cards";
         //Looper.prepare();
+        String authUrl = "";
         try {
             OAuthProvider provider = new CommonsHttpOAuthProvider("https://usosapps.wat.edu.pl/services/oauth/request_token?scope="
                     + URLEncoder.encode(scope, "utf-8"),
                     "https://usosapps.wat.edu.pl/services/oauth/access_token",
                     "https://usosapps.wat.edu.pl/apps/authorize");
-            String authUrl = provider.retrieveRequestToken(consumer, "oob");
+            authUrl = provider.retrieveRequestToken(consumer, "oob");
             System.out.println("URL:" + authUrl);
         } catch (Exception e1) {
             e1.printStackTrace();
@@ -49,7 +50,12 @@ class postData extends AsyncTask<Void, Integer, String> {
 
 
 
-        return consumer.getToken();
+        return authUrl;
     }
 
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+
+    }
 }
