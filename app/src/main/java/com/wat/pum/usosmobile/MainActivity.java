@@ -3,6 +3,7 @@ package com.wat.pum.usosmobile;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
@@ -69,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
                         new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_grades).withIcon(FontAwesome.Icon.faw_home).withIdentifier(4),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
@@ -84,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
                             // To poniżej zmieniało ActionBara dodając ikonkę kosza, ale nie działa to poprawnie bo Drawer chowa się pod ActionBar.
                             //startSupportActionMode(new ActionBarCallBack());
                             //findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(MainActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
+                        } else if (drawerItem != null && drawerItem.getIdentifier() == 4) {
+                            GradesFragment gradesFragment = new GradesFragment();
+
+                            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+                            // Replace whatever is in the fragment_container view with this fragment,
+                            // and add the transaction to the back stack so the user can navigate back
+                            transaction.replace(R.id.fragment, gradesFragment);
+                            transaction.addToBackStack(null);
+
+                            // Commit the transaction
+                            transaction.commit();
                         }
 
                         return false;
