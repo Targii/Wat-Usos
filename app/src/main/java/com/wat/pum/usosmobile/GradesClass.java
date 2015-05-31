@@ -22,32 +22,30 @@ public class GradesClass {
     // constructors
     public GradesClass (){
         this.subjectName = subjectName;
-        this.subjectUnit1Name= null;
-        this.subjectUnit1Grade= null;
-        this.subjectUnit2Name= null;
-        this.subjectUnit2Grade= null;
-        this.subjectUnit3Name= null;
-        this.subjectUnit3Grade= null;
-        this.subjectUnit4Name= null;
-        this.subjectUnit4Grade= null;
-        this.subjectUnit5Name = null;
-        this.subjectUnit5Grade = null;
-
-
+        this.subjectUnit1Name= "";
+        this.subjectUnit1Grade= "";
+        this.subjectUnit2Name= "";
+        this.subjectUnit2Grade= "";
+        this.subjectUnit3Name= "";
+        this.subjectUnit3Grade= "";
+        this.subjectUnit4Name= "";
+        this.subjectUnit4Grade= "";
+        this.subjectUnit5Name = "";
+        this.subjectUnit5Grade = "";
     }
 
     public GradesClass(String subjectName, String subjectUnit1Name,String subjectUnit1Grade ){
         this.subjectName = subjectName;
         this.subjectUnit1Name= subjectUnit1Name;
         this.subjectUnit1Grade= subjectUnit1Grade;
-        this.subjectUnit2Name= null;
-        this.subjectUnit2Grade= null;
-        this.subjectUnit3Name= null;
-        this.subjectUnit3Grade= null;
-        this.subjectUnit4Name= null;
-        this.subjectUnit4Grade= null;
-        this.subjectUnit5Name = null;
-        this.subjectUnit5Grade = null;
+        this.subjectUnit2Name= "";
+        this.subjectUnit2Grade= "";
+        this.subjectUnit3Name= "";
+        this.subjectUnit3Grade= "";
+        this.subjectUnit4Name= "";
+        this.subjectUnit4Grade= "";
+        this.subjectUnit5Name = "";
+        this.subjectUnit5Grade = "";
 
 
     }
@@ -58,12 +56,12 @@ public class GradesClass {
         this.subjectUnit1Grade= subjectUnit1Grade;
         this.subjectUnit2Name= subjectUnit2Name;
         this.subjectUnit2Grade= subjectUnit2Grade;
-        this.subjectUnit3Name= null;
-        this.subjectUnit3Grade= null;
-        this.subjectUnit4Name= null;
-        this.subjectUnit4Grade= null;
-        this.subjectUnit5Name = null;
-        this.subjectUnit5Grade = null;
+        this.subjectUnit3Name= "";
+        this.subjectUnit3Grade= "";
+        this.subjectUnit4Name= "";
+        this.subjectUnit4Grade= "";
+        this.subjectUnit5Name = "";
+        this.subjectUnit5Grade = "";
 
 
     }
@@ -78,10 +76,10 @@ public class GradesClass {
         this.subjectUnit2Grade= subjectUnit2Grade;
         this.subjectUnit3Name= subjectUnit3Name;
         this.subjectUnit3Grade= subjectUnit3Grade;
-        this.subjectUnit4Name= null;
-        this.subjectUnit4Grade= null;
-        this.subjectUnit5Name = null;
-        this.subjectUnit5Grade = null;
+        this.subjectUnit4Name= "";
+        this.subjectUnit4Grade= "";
+        this.subjectUnit5Name = "";
+        this.subjectUnit5Grade = "";
 
     }
 
@@ -96,8 +94,8 @@ public class GradesClass {
         this.subjectUnit3Grade= subjectUnit3Grade;
         this.subjectUnit4Name= subjectUnit4Name;
         this.subjectUnit4Grade= subjectUnit4Grade;
-        this.subjectUnit5Name = null;
-        this.subjectUnit5Grade = null;
+        this.subjectUnit5Name = "";
+        this.subjectUnit5Grade = "";
     }
 
     public GradesClass(String subjectName, String subjectUnit1Name,String subjectUnit1Grade, String subjectUnit2Name, String subjectUnit2Grade, String subjectUnit3Name,
