@@ -3,5 +3,6 @@
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/wat/pum/usosmobile/GradesClass.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/src/main/java/com/wat/pum/usosmobile/GradesFragment.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/wat/pum/usosmobile/MainActivityFragment.java" charset="UTF-8" />
   </component>
 </project>
