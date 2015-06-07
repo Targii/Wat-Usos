@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/USOSMobile.iml" filepath="$PROJECT_DIR$/USOSMobile.iml" />
       <module fileurl="file://$PROJECT_DIR$/Wat-Usos.iml" filepath="$PROJECT_DIR$/Wat-Usos.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
