@@ -64,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
         //Create the drawer
         result = new DrawerBuilder()
                 .withActivity(this)
+                .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
                         new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_gamepad),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_slack),
                         new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
@@ -90,14 +91,12 @@ public class MainActivity extends AppCompatActivity {
                     }
                 })
                 .withSavedInstance(savedInstanceState)
+                .withShowDrawerOnFirstLaunch(false)
                 .build();
 
         // set the selection to the item with the identifier 5
-        result.setSelectionByIdentifier(5, false);
+        result.setSelectionByIdentifier(1, false);
 
-        //set the back arrow in the toolbar
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeButtonEnabled(false);
     }
 
     @Override

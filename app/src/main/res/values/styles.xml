@@ -314,4 +314,45 @@
         <item name="cet_spanSpacing">4dp</item>
     </style>
 
+    <!-- Dashboard -->
+    <style name="DashboardTableRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+    </style>
+
+    <style name="DashboardLinearLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <!-- Icons -->
+    <style name="DashboardIcons">
+        <item name="cet_spanHeight">32dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">72dp</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:gravity">center_vertical|left</item>
+    <item name="android:layout_gravity">left</item>
+    </style>
+
+    <!-- Dashboard info -->
+    <style name="DashboardInfo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#de000000</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="DashboardInfoLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#7a000000</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
 </resources>
