@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,7 +25,7 @@ import com.rey.material.widget.ProgressView;
 import com.rey.material.widget.Spinner;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private ProgressView pv_linear;
     private Spinner spn_choose_server;
@@ -44,6 +45,7 @@ public class LoginActivity extends ActionBarActivity {
 
         // Ukrywanie ActionBara
         ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
         actionBar.hide();
 
         pv_linear = (ProgressView) findViewById(R.id.progress_pv_linear);

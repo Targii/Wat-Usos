@@ -3,6 +3,7 @@ package com.wat.pum.usosmobile;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +26,7 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
+import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.UIUtils;
 
 
@@ -44,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        // Create a few sample profile
+        // Create a few sample profile // TODO Wkleić dane otrzymane z USOSa i używając instrukcji z wiki MeterialDrawer zaimportować zdjecie przy użyciu picasso
         final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile));
 
         // Create the AccountHeader
@@ -67,28 +69,42 @@ public class MainActivity extends AppCompatActivity {
                 .withToolbar(toolbar)
                 .withAccountHeader(headerResult) //set the AccountHeader we created earlier for the header
                 .addDrawerItems(
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_home).withIcon(FontAwesome.Icon.faw_home).withIdentifier(1),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_free_play).withIcon(FontAwesome.Icon.faw_slack),
-                        new PrimaryDrawerItem().withName(R.string.drawer_item_custom).withIcon(FontAwesome.Icon.faw_eye),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_dashboard).withIcon(GoogleMaterial.Icon.gmd_person).withIdentifier(1),
+                        new PrimaryDrawerItem().withName(R.string.drawer_item_grades).withIcon(GoogleMaterial.Icon.gmd_school).withIdentifier(2),
                         new SectionDrawerItem().withName(R.string.drawer_item_section_header),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_settings).withIcon(FontAwesome.Icon.faw_cog),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question).setEnabled(false),
-                        new SecondaryDrawerItem().withName(R.string.drawer_item_open_source).withIcon(FontAwesome.Icon.faw_github),
+                        new SecondaryDrawerItem().withName(R.string.drawer_item_help).withIcon(FontAwesome.Icon.faw_question),
                         new SecondaryDrawerItem().withName(R.string.drawer_item_contact).withIcon(FontAwesome.Icon.faw_bullhorn)
                 )
                 .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
                     @Override
                     public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
-
-                        // TODO Wyświetlanie kolejnych fragmentów z oknami
-                        if (drawerItem != null && drawerItem.getIdentifier() == 1) {
-                            // To poniżej zmieniało ActionBara dodając ikonkę kosza, ale nie działa to poprawnie bo Drawer chowa się pod ActionBar.
-                            //startSupportActionMode(new ActionBarCallBack());
-                            //findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(MainActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
+                        if (drawerItem != null && drawerItem instanceof Nameable) {
+                            getSupportActionBar().setTitle(((Nameable) drawerItem).getNameRes());
+                            //ignore the DemoFragment and it's layout it's just to showcase the handle with an keyboard
+                            if (drawerItem.getIdentifier() == 1) {
+                                Fragment f = MainActivityFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fr_main, f).commit();
+                            } else if (drawerItem.getIdentifier() == 2) {
+                                Fragment f = GradesFragment.newInstance(getResources().getString(((Nameable) drawerItem).getNameRes()));
+                                getSupportFragmentManager().beginTransaction().replace(R.id.fr_main, f).commit();
+                            }
                         }
 
                         return false;
                     }
+
+
+                    //if (drawerItem != null && drawerItem.getIdentifier() == 1) {
+
+
+
+                        // To poniżej zmieniało ActionBara dodając ikonkę kosza, ale nie działa to poprawnie bo Drawer chowa się pod ActionBar.
+                        //startSupportActionMode(new ActionBarCallBack());
+                        //findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(MainActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
+                    //}
+
+
                 })
                 .withSavedInstance(savedInstanceState)
                 .withShowDrawerOnFirstLaunch(false)

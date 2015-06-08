@@ -1,15 +1,11 @@
 package com.wat.pum.usosmobile;
 
-import android.app.Activity;
-import android.content.res.Resources;
-import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,6 +14,8 @@ import com.squareup.picasso.Picasso;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    private static final String KEY_TITLE = "title";
 
     public MainActivityFragment() {
     }
@@ -39,16 +37,27 @@ public class MainActivityFragment extends Fragment {
 
         ImageView iv_user_photo = (ImageView) view.findViewById(R.id.iv_user_photo);
 
-        // Probowalem podawaæ wygenerowany adres z USOS Api Browser ale nie dzia³a. Albo przez SSLa albo przez brak sesji z telefonu.
+        // Probowalem podawaÄ‡ wygenerowany adres z USOS Api Browser ale nie dziaÅ‚a. Albo przez SSLa albo przez brak sesji z telefonu.
         Picasso.with(getActivity()).load("http://www.whatsupwhatson.com/wp-content/uploads/2014/03/how_could_this_face_lie_to_you.jpg")
             .transform(new CircleTransform())
             .into(iv_user_photo);
-        // TODO Jeœli ktoœ nie ma zdjecia lub ma zablokowane za³adowaæ domyœlny. Trzeba wykrywaæ metod¹ user->has_photo
+        // TODO JeÅ¼eli ktoÅ› nie ma zdjecia lub ma zablokowane zaÅ‚adowaÄ‡ domyÅ›lny. Trzeba wykrywaÄ‡ metodÄ… user->has_photo
         //Ladowanie obrazka z drawable
         //int imageresource = getResources().getIdentifier("@drawable/profile", "drawable", getActivity().getPackageName());
         //iv_user_photo.setImageResource(imageresource);
 
 
 
+    }
+
+    public static MainActivityFragment newInstance(String title) {
+        MainActivityFragment f = new MainActivityFragment();
+
+        Bundle args = new Bundle();
+
+        args.putString(KEY_TITLE, title);
+        f.setArguments(args);
+
+        return (f);
     }
 }
