@@ -43,13 +43,25 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.ViewHolder> {
         mDataset = myDataset;
     }
 
+    @Override
+    public int getItemViewType(int position) {
+        // Just as an example, return 0 or 2 depending on position
+        // Note that unlike in ListView adapters, types don't have to be contiguous
+        return position % 2 * 2;
+    }
+
     // Create new views (invoked by the layout manager)
     @Override
     public ListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                    int viewType) {
         // create a new view
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grades_row, parent, false);
-        // set the view's size, margins, paddings and layout parameters
+        View v;
+        switch (viewType) {
+            case 0: v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grades_row, parent, false); break;
+            case 2: v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grades_row_semester, parent, false); break;
+            default: v = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_grades_row, parent, false);
+        }
+
         return new ViewHolder(v);
     }
 
