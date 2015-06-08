@@ -30,6 +30,7 @@ import org.apache.http.impl.client.DefaultHttpClient;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 
 import oauth.signpost.OAuthConsumer;
 import oauth.signpost.OAuthProvider;
@@ -229,7 +230,7 @@ public class LoginActivity extends ActionBarActivity {
 
                 // Przejście do kolejnego activity
                 Intent intent = new Intent(mContext, MainActivity.class);
-                //intent.putExtra(EXTRA_MESSAGE, message); // przekazanie zmiennych np. tokenów
+                intent.putExtra("Response_Text", respText); // przekazanie zmiennych np. tokenów
                 startActivity(intent);
 
                 // TODO Zniszczyć LoginActivity, żeby nie można było do niego wrócić przyciskiem wstecz
@@ -259,7 +260,12 @@ public class LoginActivity extends ActionBarActivity {
 
         }
         else{
-            new getUserInfo().execute(provider);
+            try {
+                new getUserInfo().execute(provider).get(3000, TimeUnit.MILLISECONDS);
+            }catch(Exception e){
+                System.out.println(e);
+            }
+
         }
 
     }
@@ -291,6 +297,7 @@ public class LoginActivity extends ActionBarActivity {
     }
     String ACCESS_TOKEN;
     String TOKEN_SECRET;
+    String respText;
     public class getUserInfo extends AsyncTask<OAuthProvider, Integer, String> {
         @Override
         protected String doInBackground(OAuthProvider... params) {
@@ -305,16 +312,16 @@ public class LoginActivity extends ActionBarActivity {
                 consumer.setTokenWithSecret(consumer.getToken(), consumer.getTokenSecret());
 
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpGet request = new HttpGet("https://usosapps.wat.edu.pl/services/users/user?");
+                HttpGet request = new HttpGet("https://usosapps.wat.edu.pl/services/courses/user?active_terms_only=true&fields=course_editions%5Bcourse_id%7Ccourse_name%7Cgrades%5Bvalue_symbol%5D%7Ccourse_units_ids%5D%7Cterms%5Bid%5D");
                 consumer.sign(request);
                 System.out.println(request.getURI());
 
 
                 HttpResponse response = httpClient.execute(request);
-                System.out.println("RESPONSE:" + response.getEntity());
-                System.out.println(new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine());
 
-
+                //System.out.println(new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine());
+                respText = (String) new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine();
+                //System.out.println(" Text z LoginActivity: "+respText);
 
             } catch (Exception e1) {
                 e1.printStackTrace();
