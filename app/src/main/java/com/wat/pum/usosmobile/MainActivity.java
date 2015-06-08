@@ -1,4 +1,4 @@
-package com.example.watusos.watusos;
+package com.wat.pum.usosmobile;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -26,7 +26,6 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.util.UIUtils;
-import com.wat.pum.usosmobile.R;
 
 
 public class MainActivity extends AppCompatActivity {

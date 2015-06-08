@@ -3,10 +3,10 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 22
     buildToolsVersion "22.0.1"
-    packagingOptions{
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/NOTICE'
-    }
+        packagingOptions{
+            exclude 'META-INF/LICENSE'
+            exclude 'META-INF/NOTICE'
+        }
 
     defaultConfig {
         applicationId "com.wat.pum.usosmobile"
@@ -32,7 +32,13 @@ dependencies {
     }
     compile 'com.mikepenz:octicons-typeface:2.2.0@aar'
     compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'oauth.signpost:signpost-core:1.2.1.2'
-    compile 'org.apache.httpcomponents:httpclient-android:4.3.5.1'
-    compile 'oauth.signpost:signpost-commonshttp4:1.2.1.2'
-}
+    compile ('oauth.signpost:signpost-core:1.2.1.2') {
+        exclude module: 'commons-codec'
+    }
+    compile ('oauth.signpost:signpost-commonshttp4:1.2.1.2'){
+            exclude module: 'commons-logging'
+            exclude module: 'httpcore'
+            exclude module: 'httpclient'
+        }
+    }
+

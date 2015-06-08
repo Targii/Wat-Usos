@@ -1,4 +1,4 @@
-package com.example.watusos.watusos;
+package com.wat.pum.usosmobile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
-import com.wat.pum.usosmobile.R;
 
 
 /**

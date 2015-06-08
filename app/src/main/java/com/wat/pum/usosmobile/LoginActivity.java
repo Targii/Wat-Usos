@@ -1,4 +1,4 @@
-package com.example.watusos.watusos;
+package com.wat.pum.usosmobile;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,7 +22,6 @@ import android.widget.Toast;
 import com.rey.material.widget.Button;
 import com.rey.material.widget.ProgressView;
 import com.rey.material.widget.Spinner;
-import com.wat.pum.usosmobile.R;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.watusos.watusos;
+package com.wat.pum.usosmobile;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
