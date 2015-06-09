@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USOSmobile</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="report_bug">Zgłoś problem</string>
+
+    <string name="drawer_item_dashboard">Dashboard</string>
+    <string name="drawer_item_grades">Oceny</string>
+    <string name="drawer_item_section_header">Aplikacja</string>
+    <string name="drawer_item_settings">Ustawienia</string>
+    <string name="drawer_item_help">Pomoc</string>
+    <string name="drawer_item_contact">Kontakt</string>
+</resources>
