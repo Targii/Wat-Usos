@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setTitle("Dashboard");
+
         // Create a few sample profile // TODO Wkleić dane otrzymane z USOSa i używając instrukcji z wiki MeterialDrawer zaimportować zdjecie przy użyciu picasso
         final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile));
 

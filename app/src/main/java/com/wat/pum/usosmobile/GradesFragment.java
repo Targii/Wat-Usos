@@ -66,7 +66,7 @@ public class GradesFragment extends Fragment {
         myDataset.add("Siódmy wiersz");
         myDataset.add("Ósmy wiersz");
 
-        mRecyclerView.setAdapter(new ListAdapter(myDataset));
+        mRecyclerView.setAdapter(new ListAdapter(getActivity().getApplicationContext(), myDataset));
 
     }
 
