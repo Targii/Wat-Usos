@@ -1,13 +1,13 @@
 package com.wat.pum.usosmobile;
 
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,22 +30,15 @@ import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
 import com.mikepenz.materialdrawer.util.UIUtils;
 
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
-import oauth.signpost.OAuthConsumer;
-import oauth.signpost.OAuthProvider;
-import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 
 
 public class MainActivity extends AppCompatActivity {
     private static final int PROFILE_SETTING = 1;
+
+    public static String valueGrades;
 
     //save our header or result
     private AccountHeader headerResult = null;
@@ -59,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setTitle("Dashboard");
 
         // Create a few sample profile // TODO Wkleić dane otrzymane z USOSa i używając instrukcji z wiki MeterialDrawer zaimportować zdjecie przy użyciu picasso
         final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile));
@@ -76,19 +71,16 @@ public class MainActivity extends AppCompatActivity {
                 )
                 .withSavedInstance(savedInstanceState)
                 .build();
+
+
         //get Usos response value
         System.out.print("TO z MainActivity:");
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            String value = extras.getString("Response_Text");
-            System.out.println("TO z MainActivity: " + value);
-              try {
-                JSONObject serverResponseGrades = new JSONObject(value);
-            }catch(Exception e){
-                System.out.println(e);
-            }
-        }
+            valueGrades = extras.getString("Response_Grades");
+            System.out.println("TO z MainActivity: " + valueGrades);
 
+        }
 
         //Create the drawer
         result = new DrawerBuilder()
@@ -138,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
 
         // set the selection to the item with the identifier 5
-        result.setSelectionByIdentifier(1, false);
+        result.setSelectionByIdentifier(1, true);
 
     }
 
@@ -203,7 +195,4 @@ public class MainActivity extends AppCompatActivity {
             return false;
         }
     }
-
-
-
 }

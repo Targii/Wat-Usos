@@ -230,7 +230,8 @@ public class LoginActivity extends ActionBarActivity {
 
                 // Przejście do kolejnego activity
                 Intent intent = new Intent(mContext, MainActivity.class);
-                intent.putExtra("Response_Text", respText); // przekazanie zmiennych np. tokenów
+                intent.putExtra("Response_Grades", respGrades); // przekazanie zmiennych do MainActivity, Oceny
+                intent.putExtra("Response_User", respUser); // przekazanie zmiennych do MainActivity, Dane Usera
                 startActivity(intent);
 
                 // TODO Zniszczyć LoginActivity, żeby nie można było do niego wrócić przyciskiem wstecz
@@ -261,7 +262,7 @@ public class LoginActivity extends ActionBarActivity {
         }
         else{
             try {
-                new getUserInfo().execute(provider).get(3000, TimeUnit.MILLISECONDS);
+                new getUserInfo().execute(provider).get(5000, TimeUnit.MILLISECONDS);
             }catch(Exception e){
                 System.out.println(e);
             }
@@ -297,7 +298,7 @@ public class LoginActivity extends ActionBarActivity {
     }
     String ACCESS_TOKEN;
     String TOKEN_SECRET;
-    String respText;
+    String respGrades, respUser;
     public class getUserInfo extends AsyncTask<OAuthProvider, Integer, String> {
         @Override
         protected String doInBackground(OAuthProvider... params) {
@@ -310,18 +311,27 @@ public class LoginActivity extends ActionBarActivity {
                 System.out.println(pin);
                 provider.retrieveAccessToken(consumer, pin);
                 consumer.setTokenWithSecret(consumer.getToken(), consumer.getTokenSecret());
+                ACCESS_TOKEN = consumer.getToken();
+                TOKEN_SECRET = consumer.getTokenSecret();
 
                 HttpClient httpClient = new DefaultHttpClient();
-                HttpGet request = new HttpGet("https://usosapps.wat.edu.pl/services/courses/user?active_terms_only=true&fields=course_editions%5Bcourse_id%7Ccourse_name%7Cgrades%5Bvalue_symbol%5D%7Ccourse_units_ids%5D%7Cterms%5Bid%5D");
-                consumer.sign(request);
-                System.out.println(request.getURI());
+                //Request do wyciągnięcia ocen
+                HttpGet requestGrades = new HttpGet("https://usosapps.wat.edu.pl/services/courses/user?active_terms_only=true&fields=course_editions%5Bcourse_id%7Ccourse_name%7Cgrades%5Bvalue_symbol%5D%7Ccourse_units_ids%5D%7Cterms%5Bid%5D");
+                consumer.sign(requestGrades);
+
+                HttpResponse response = httpClient.execute(requestGrades);
+                respGrades = (String) new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine();
+                System.out.println("USER GRADES:" + respGrades);
+//                //Request do wyciągnięcia danych użytkownika
+                HttpGet requestUser = new  HttpGet("https://usosapps.wat.edu.pl/services/users/user?fields=id%7Cfirst_name%7Clast_name%7Cemail%7Cstudent_status%7Cstudent_number%7Cpesel%7Cphoto_urls%5B200x200%5D");
+                consumer.sign(requestUser);
+
+                HttpResponse responseUser = httpClient.execute(requestUser);
+                respUser = (String) new BufferedReader(new InputStreamReader(responseUser.getEntity().getContent())).readLine();
+                System.out.println("USER INFO: " +respUser);
 
 
-                HttpResponse response = httpClient.execute(request);
 
-                //System.out.println(new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine());
-                respText = (String) new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine();
-                //System.out.println(" Text z LoginActivity: "+respText);
 
             } catch (Exception e1) {
                 e1.printStackTrace();
