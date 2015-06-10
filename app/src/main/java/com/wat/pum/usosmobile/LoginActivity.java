@@ -280,15 +280,15 @@ public class LoginActivity extends ActionBarActivity {
 
             try {
                 authUrl = provider.retrieveRequestToken(consumer, "oob");
-                System.out.println("Chodzi?:" + authUrl);
+                //System.out.println("Chodzi?:" + authUrl);
 
             } catch (Exception e1) {
                 e1.printStackTrace();
                 // System.out.println(e1);
             }
             System.out.println("Fetching request token...");
-            System.out.println("Request token: " + consumer.getToken());
-            System.out.println("Token secret: " + consumer.getTokenSecret());
+            //System.out.println("Request token: " + consumer.getToken());
+            //System.out.println("Token secret: " + consumer.getTokenSecret());
 
             ACCESS_TOKEN = consumer.getToken();
             TOKEN_SECRET = consumer.getTokenSecret();
@@ -308,7 +308,7 @@ public class LoginActivity extends ActionBarActivity {
             consumer.setTokenWithSecret(ACCESS_TOKEN, TOKEN_SECRET);
 
             try {
-                System.out.println(pin);
+                //System.out.println(pin);
                 provider.retrieveAccessToken(consumer, pin);
                 consumer.setTokenWithSecret(consumer.getToken(), consumer.getTokenSecret());
                 ACCESS_TOKEN = consumer.getToken();
@@ -321,14 +321,14 @@ public class LoginActivity extends ActionBarActivity {
 
                 HttpResponse response = httpClient.execute(requestGrades);
                 respGrades = (String) new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine();
-                System.out.println("USER GRADES:" + respGrades);
+                //System.out.println("USER GRADES:" + respGrades);
 //                //Request do wyciągnięcia danych użytkownika
                 HttpGet requestUser = new  HttpGet("https://usosapps.wat.edu.pl/services/users/user?fields=id%7Cfirst_name%7Clast_name%7Cemail%7Cstudent_status%7Cstudent_number%7Cpesel%7Cphoto_urls%5B200x200%5D");
                 consumer.sign(requestUser);
 
                 HttpResponse responseUser = httpClient.execute(requestUser);
                 respUser = (String) new BufferedReader(new InputStreamReader(responseUser.getEntity().getContent())).readLine();
-                System.out.println("USER INFO: " +respUser);
+                //System.out.println("USER INFO: " +respUser);
 
 
 
@@ -338,8 +338,8 @@ public class LoginActivity extends ActionBarActivity {
                 // System.out.println(e1);
             }
 
-            System.out.println("ACCESS token: " + consumer.getToken());
-            System.out.println("ACCESS secret: " + consumer.getTokenSecret());
+            //System.out.println("ACCESS token: " + consumer.getToken());
+            //System.out.println("ACCESS secret: " + consumer.getTokenSecret());
 
 
 
