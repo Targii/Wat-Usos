@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">USOSmobile</string>
+    <string name="action_settings">Ustawienia</string>
+    <string name="report_bug">Zgłoś problem</string>
+
+    <string name="drawer_item_dashboard">Dashboard</string>
+    <string name="drawer_item_grades">Oceny</string>
+    <string name="drawer_item_section_header">Aplikacja</string>
+    <string name="drawer_item_settings">Ustawienia</string>
+    <string name="drawer_item_help">Pomoc</string>
+    <string name="drawer_item_contact">Kontakt</string>
+    <string name="tv_album_label">Numer albumu</string>
+    <string name="tv_album_lack">Brak numeru albumu</string>
+    <string name="tv_email_lack">Brak adresu e-mail</string>
+    <string name="tv_full_name_lack">Brak imienia i nazwiska</string>
+    <string name="tv_pesel_lack">Brak numeru PESEL</string>
+    <string name="tv_phone_label">Numer telefonu</string>
+    <string name="tv_phone_lack">Brak numeru telefonu</string>
+    <string name="tv_status_access_refuse">Serwer odmówił dostępu do tej informacji</string>
+    <string name="tv_status_active">Aktywny student</string>
+    <string name="tv_status_inactive">Nieaktywny student</string>
+    <string name="tv_status_never_was">Nigdy nie był studetntem</string>
+</resources>
