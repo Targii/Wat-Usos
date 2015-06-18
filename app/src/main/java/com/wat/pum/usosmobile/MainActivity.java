@@ -1,6 +1,11 @@
 package com.wat.pum.usosmobile;
 
+
+import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -12,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 
 import com.mikepenz.google_material_typeface_library.GoogleMaterial;
 import com.mikepenz.iconics.IconicsDrawable;
@@ -28,11 +34,14 @@ import com.mikepenz.materialdrawer.model.SectionDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
+import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.UIUtils;
+import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import static android.app.PendingIntent.getActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -50,14 +59,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //get Usos response value
+        System.out.print("TO z MainActivity:");
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            valueGrades = extras.getString("Response_Grades");
+            valueUser = extras.getString("Response_User");
+            System.out.println("TO z MainActivity: " + valueGrades);
+
+        }
+
+        //pobieranie danych uzytkownika
+        JSONObject valuesUser = createJSONObject(valueUser);
+        String fullName = getFullName(valuesUser);
+        String email = getEmail(valuesUser);
+
+        //pobiranie zdjecia uzytkownika
+
+        DrawerImageLoader.init(new DrawerImageLoader.IDrawerImageLoader() {
+            @Override
+            public void set(ImageView imageView, Uri uri, Drawable placeholder) {
+                Picasso.with(imageView.getContext()).load(uri).placeholder(placeholder).into(imageView);
+            }
+
+            @Override
+            public void cancel(ImageView imageView) {
+                Picasso.with(imageView.getContext()).cancelRequest(imageView);
+            }
+
+            @Override
+            public Drawable placeholder(Context ctx) {
+                return null;
+            }
+        });
+
+
         // Handle Toolbar
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setTitle("Dashboard");
 
+
         // Create a few sample profile // TODO Wkleić dane otrzymane z USOSa i używając instrukcji z wiki MeterialDrawer zaimportować zdjecie przy użyciu picasso
-        final IProfile profile = new ProfileDrawerItem().withName("Mike Penz").withEmail("mikepenz@gmail.com").withIcon(getResources().getDrawable(R.drawable.profile));
+        final IProfile profile = new ProfileDrawerItem().withName(fullName).withEmail(email).withIcon(getResources().getDrawable(R.drawable.profile));
 
         // Create the AccountHeader
         headerResult = new AccountHeaderBuilder()
@@ -73,16 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 .withSavedInstance(savedInstanceState)
                 .build();
 
-
-        //get Usos response value
-        System.out.print("TO z MainActivity:");
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            valueGrades = extras.getString("Response_Grades");
-            valueUser = extras.getString("Response_User");
-            System.out.println("TO z MainActivity: " + valueGrades);
-
-        }
 
         //Create the drawer
         result = new DrawerBuilder()
@@ -119,10 +154,9 @@ public class MainActivity extends AppCompatActivity {
                     //if (drawerItem != null && drawerItem.getIdentifier() == 1) {
 
 
-
-                        // To poniżej zmieniało ActionBara dodając ikonkę kosza, ale nie działa to poprawnie bo Drawer chowa się pod ActionBar.
-                        //startSupportActionMode(new ActionBarCallBack());
-                        //findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(MainActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
+                    // To poniżej zmieniało ActionBara dodając ikonkę kosza, ale nie działa to poprawnie bo Drawer chowa się pod ActionBar.
+                    //startSupportActionMode(new ActionBarCallBack());
+                    //findViewById(R.id.action_mode_bar).setBackgroundColor(UIUtils.getThemeColorFromAttrOrRes(MainActivity.this, R.attr.colorPrimary, R.color.material_drawer_primary));
                     //}
 
 
@@ -196,5 +230,35 @@ public class MainActivity extends AppCompatActivity {
         public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
             return false;
         }
+    }
+
+    public JSONObject createJSONObject(String valueUser) {
+        try {
+            JSONObject object = new JSONObject(valueUser);
+            return object;
+        } catch (JSONException exc) {
+            Log.i("JSONException", "JSONException in createJSONObject method");
+        }
+        return null;
+    }
+
+    public String getFullName(JSONObject valuesUser) {
+        try {
+            String fullName = valuesUser.getString("first_name") + " " + valuesUser.getString("last_name");
+            return fullName;
+        } catch (JSONException exc) {
+            Log.i("JSONException", "JSONException in getFullName method");
+        }
+        return null;
+    }
+
+    public String getEmail(JSONObject valuesUser) {
+        try {
+            String email = valuesUser.getString("email");
+            return email;
+        } catch (JSONException exc) {
+            Log.i("JSONException", "JSONException in getEmail method");
+        }
+        return null;
     }
 }
