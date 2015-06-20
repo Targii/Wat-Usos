@@ -27,6 +27,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -72,7 +75,7 @@ public class LoginActivity extends ActionBarActivity {
         userLogon();
     }
 
-
+    public static String ServerInfoResp;
     private class DownloadServerInfo extends AsyncTask<Void, Void, Integer> {
         @Override
         protected Integer doInBackground(Void... arg0) {
@@ -80,8 +83,18 @@ public class LoginActivity extends ActionBarActivity {
             // tutaj nie możesz nic zmieniać w UI, tylko wykonywać obliczenia i zadania
             // TODO Pobranie informacji z mother server: http://apps.usos.edu.pl/ o dostępnych serwerach apisrv->instalations
             try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
+                OAuthConsumer consumer = new CommonsHttpOAuthConsumer("24cD4dfpbF5YeDQvMgMN",
+                        "2t2qmArZ24mycqVgaw8k4JayFLHgFe5QaQ4CWnaK");
+
+                HttpClient httpClient = new DefaultHttpClient();
+                //Request do wyciągnięcia ocen
+                HttpGet ServerInfo = new HttpGet("https://usosapps.pwsz.elblag.pl/services/apisrv/installations");
+
+
+                HttpResponse response = httpClient.execute(ServerInfo);
+                ServerInfoResp = (String) new BufferedReader(new InputStreamReader(response.getEntity().getContent())).readLine();
+                System.out.println("INSTALLATIONS:" + ServerInfoResp);
+            } catch (Exception e) {
                 e.printStackTrace();
             }
             return 1;
@@ -112,6 +125,7 @@ public class LoginActivity extends ActionBarActivity {
 
                 findViewById(R.id.ll_select_server).setVisibility(View.VISIBLE); // wyswietlenie wyboru serwera
 
+
                 // ustawienie listy (spinner) // TODO
                 String[] items = new String[5];
                 items[0] = "";
@@ -123,7 +137,6 @@ public class LoginActivity extends ActionBarActivity {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(getBaseContext(), R.layout.row_spn, items);
                 adapter.setDropDownViewResource(R.layout.row_spn_dropdown);
                 spn_choose_server.setAdapter(adapter);
-
             } else {
                 // TODO Dodać wyjątek w razie błędu
             }
